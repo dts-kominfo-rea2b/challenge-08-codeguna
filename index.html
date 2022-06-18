@@ -84,36 +84,30 @@
             // Fungsi yang digunakan untuk menambahkan tulisan
             // Jangan ubah cara deklarasi fungsinya, cukup isi saja
             function fnClickHandler(toDoItem) {
-              let li = document.createElement('li');
-              li.textContent = name;
-              li.className = 'list-item';
-              return li;
+              console.log(toDoItem)
+              if (toDoItem.target.type === "submit" || toDoItem.key === "Enter"){
+                console.log(dataInput)
+                var node = document.createElement('li');
+                node.appendChild(document.createTextNode(dataInput));
+                document.querySelector('ul').appendChild(node);
+                input.value = "";
+                dataInput = "";
+              }
             }
-
-            function createElement(name){
-              let li = document.createElement('li');
-              li.textContent = name;
-              li.className = 'list-item';
-              return li;
+            function tempData(valueKey){
+              dataInput = valueKey.target.value;
             }
+            input.addEventListener('keypress', fnClickHandler);
+            input.addEventListener('keyup', tempData)
+            button.addEventListener('click', fnClickHandler)
 
             // TODO: register event onclick / addEventListener untuk button
             // akan menjalankan fungsi fnClickHandler
-            button.addEventListener('click', () => {
-              const val = input.value;
-              fnClickHandler(val);
-              input.value = '';
-            });
+            
 
             // TODO: register event onkeypress / addEventListener untuk input
             // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
-            input.addEventListener('keypress', (event) => {
-              if(event.key === "Enter") {
-                const val = input.value;
-                fnClickHandler(val);
-                input.value = '';
-              }
-            });
+            
         </script>
     </body>
 </html>
